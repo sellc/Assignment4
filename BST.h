@@ -5,21 +5,36 @@
 
 using namespace std;
 
-class BSTAVL {
+//Chris Sellers
+//11/21/2018
+//Assignment 4 - UPC Scanner
+
+//This is a binary search tree. Each node contains
+//a key, value, left and right reference to nodes
+class BST {
 public:
-	BSTAVL() {
+
+	//Constructor
+	BST() {
 		root = nullptr;
 	}
-	~BSTAVL() {
+
+	//Destructor
+	~BST() {
 		deleteAllNodes();
 	}
+
+	//Insert a node with the given key and value. Base function
 	void insert(string key, string value) {
 		Node* newNode = new Node(key, value);
 		insert(newNode, root);
 	}
+
+	//Find a node with the given key. Base function
 	string find(string key) {
 		return find(key, root);
 	}
+	//Delete all nodes. Base function
 	void deleteAllNodes() {
 		deleteAllNodes(root);
 	}
@@ -39,6 +54,7 @@ private:
 
 	Node* root;
 
+	//Insert a new node
 	void insert(Node* newNode, Node*& root) {
 		if (root == nullptr) {
 			root = newNode;
@@ -49,6 +65,8 @@ private:
 			insert(newNode, root->right);
 		}
 	}
+
+	//Find a node with the given key
 	string find(string key, Node* root) {
 		if (root->key == key) {
 			return root->value;
@@ -60,6 +78,7 @@ private:
 		return NULL;
 	}
 
+	//Delete all nodes in the order of left, right, root
 	void deleteAllNodes(Node* root) {
 		if (root->left != nullptr) {
 			deleteAllNodes(root->left);

@@ -5,15 +5,19 @@
 
 using namespace std;
 
+//Chris Sellers
+//11/21/2018
+//Assignment 4 - UPC Scanner
+
+//Barcode Scanner with an array data structure
 int main(int argc, char** arga) {
+	//Node used in array to store key and value
 	struct Node {
 		string key;
 		string value;
-		Node* left;
-		Node* right;
 	};
 	size_t size = 1000000;
-	Node* pInt = new Node[size];
+	Node* nodeArray = new Node[size];
 	int count = 0;
 	int index = 0;
 
@@ -25,47 +29,51 @@ int main(int argc, char** arga) {
 	string value = "";
 	int switchValue = 0;
 
+	//Open file and read in each line
 	inputFile.open(arga[1]);
 	getline(inputFile, input, '\n');
 	while (!inputFile.eof()) {
 		switch (switchValue) {
+
+		//First token ending with ',''
 		case 0:
 			getline(inputFile, input, ',');
 			key = input;
 			break;
+
+		//Second token ending with '\n'
 		case 1:
 			getline(inputFile, input, '\n');
 			value = input;
 			if (count + 1 < size) {
-				pInt[count].key = key;
-				pInt[count].value = value;
+				nodeArray[count].key = key;
+				nodeArray[count].value = value;
 				count++;
 			}
 			break;
 		}
+		//To alternate between tokens
 		switchValue++;
 		switchValue %= 2;
 	}
 	inputFile.close();
 
-	key = arga[2];
-
+//Search for a node and print the total time
 	clock_t t = clock();
-
 	while (index < size) {
-		if ((pInt[index].key).compare(key) == 0) {
-			cout << pInt[index].value << endl;
+		if ((nodeArray[index].key).compare(arga[2]) == 0) {
+			cout << nodeArray[index].value << endl;
 			index = size;
 		}
 		index++;
 	}
-
 	t = clock() - t;
+
 	cout << "time: " << t << " milliseconds" << endl;
 	cout << CLOCKS_PER_SEC << " clocks per second" << endl;
 	cout << "time: " << t * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
 
-	delete[] pInt;
+	delete[] nodeArray;
 
 	return 0;
 }
