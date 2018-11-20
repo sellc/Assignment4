@@ -1,15 +1,28 @@
 #include <time.h>
 #include <fstream>
 #include <sstream>
-#include "BST.h"
+#include <iostream>
+
+using namespace std;
 
 int main(int argc, char** arga) {
+	struct Node {
+		string key;
+		string value;
+		Node* left;
+		Node* right;
+	};
+	size_t size = 1000000;
+	Node* pInt = new Node[size];
+	int count = 0;
+	int index = 0;
+
 	ifstream inputFile;
+	istringstream inputStream;
+
 	string input = "";
-	BSTAVL bst;
 	string key = "";
 	string value = "";
-	istringstream inputStream;
 	int switchValue = 0;
 
 	inputFile.open(arga[1]);
@@ -23,7 +36,11 @@ int main(int argc, char** arga) {
 		case 1:
 			getline(inputFile, input, '\n');
 			value = input;
-			bst.insert(key, value);
+			if (count + 1 < size) {
+				pInt[count].key = key;
+				pInt[count].value = value;
+				count++;
+			}
 			break;
 		}
 		switchValue++;
@@ -31,14 +48,24 @@ int main(int argc, char** arga) {
 	}
 	inputFile.close();
 
+	key = arga[2];
+
 	clock_t t = clock();
 
-	cout << bst.find(arga[2]) << endl;
+	while (index < size) {
+		if ((pInt[index].key).compare(key) == 0) {
+			cout << pInt[index].value << endl;
+			index = size;
+		}
+		index++;
+	}
 
 	t = clock() - t;
 	cout << "time: " << t << " milliseconds" << endl;
 	cout << CLOCKS_PER_SEC << " clocks per second" << endl;
 	cout << "time: " << t * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+
+	delete[] pInt;
 
 	return 0;
 }
