@@ -9,6 +9,10 @@ using namespace std;
 //11/21/2018
 //Assignment 4 - UPC Scanner
 
+//*****Running the program in terminal*****
+//The ./(File Name) upc_corpus.txt (upc number)
+//-Sample- ./Array upc_corpus.txt 797776111084
+
 //Barcode Scanner with an array data structure
 int main(int argc, char** arga) {
 	//Node used in array to store key and value

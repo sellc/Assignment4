@@ -7,6 +7,10 @@
 //11/21/2018
 //Assignment 4 - UPC Scanner
 
+//*****Running the program in terminal*****
+//The ./(File Name) upc_corpus.txt (upc number)
+//-Sample- ./BST upc_corpus.txt 797776111084
+
 //Barcode Scanner with a BST data structure
 int main(int argc, char** arga) {
 	ifstream inputFile;
