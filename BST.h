@@ -70,9 +70,9 @@ private:
 	string find(string key, Node* root) {
 		if (root->key == key) {
 			return root->value;
-		} else if (root->key > key) {
+		} else if (root->key.compare(key) > 0) {
 			return find(key, root->left);
-		} else if (root->key < key) {
+		} else if (root->key.compare(key) < 0) {
 			return find(key, root->right);
 		}
 		return NULL;
