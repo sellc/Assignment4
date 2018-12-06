@@ -1,6 +1,4 @@
 #include <time.h>
-#include <fstream>
-#include <sstream>
 #include "Scanner.h"
 
 //Chris Sellers
